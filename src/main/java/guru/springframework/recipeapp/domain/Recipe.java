@@ -22,6 +22,9 @@ public class Recipe extends BaseDomain {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
 
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
     public String getDescription() {
         return description;
     }
@@ -100,5 +103,13 @@ public class Recipe extends BaseDomain {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 }
