@@ -12,18 +12,20 @@ public class Recipe extends BaseDomain {
     private String source;
     private String url;
     private String directions;
-
     @Lob
     private Byte[] image;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
-
     @Enumerated(value = EnumType.STRING)
     private Difficulty difficulty;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+    @ManyToMany
+    @JoinTable(name = "recipe_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 
     public String getDescription() {
         return description;
@@ -97,6 +99,14 @@ public class Recipe extends BaseDomain {
         this.notes = notes;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -105,11 +115,11 @@ public class Recipe extends BaseDomain {
         this.ingredients = ingredients;
     }
 
-    public Difficulty getDifficulty() {
-        return difficulty;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
