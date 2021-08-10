@@ -1,9 +1,7 @@
 package guru.springframework.recipeapp.domain;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe extends BaseDomain {
@@ -20,6 +18,9 @@ public class Recipe extends BaseDomain {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     public String getDescription() {
         return description;
@@ -91,5 +92,13 @@ public class Recipe extends BaseDomain {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
