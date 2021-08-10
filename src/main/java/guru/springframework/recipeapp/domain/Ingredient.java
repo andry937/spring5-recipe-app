@@ -2,6 +2,7 @@ package guru.springframework.recipeapp.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 @Entity
@@ -11,6 +12,9 @@ public class Ingredient extends BaseDomain{
 
     @ManyToOne
     private Recipe recipe;
+
+    @OneToOne
+    private UnitOfMeasure unitOfMeasure;
 
     public String getDescription() {
         return description;
@@ -34,5 +38,13 @@ public class Ingredient extends BaseDomain{
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public UnitOfMeasure getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
     }
 }
