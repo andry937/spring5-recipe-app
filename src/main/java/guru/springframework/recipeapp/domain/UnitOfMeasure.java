@@ -4,13 +4,13 @@ import javax.persistence.Entity;
 
 @Entity
 public class UnitOfMeasure extends BaseDomain{
-    private String uom;
+    private String description;
 
-    public String getUom() {
-        return uom;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUom(String uom) {
-        this.uom = uom;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
