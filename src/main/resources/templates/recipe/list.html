@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout (~{::body},~{::head/title},~{})}">
+<head>
+    <title>Recipe List</title>
+</head>
+<body>
+<h1 th:text="${'List of recipes'}"></h1>
+<ul>
+    <li  th:each="recipe : ${recipes}">
+        <a th:text="${recipe.description}" th:href="@{/recipes/} + ${recipe.id}"></a>
+    </li>
+</ul>
+</body>
+</html>

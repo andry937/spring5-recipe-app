@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout (~{::body},~{::head/title},~{::link})}">
+<head>
+    <title th:text="${recipe.description}"></title>
+    <link rel="stylesheet" th:href="@{/resources/css/recipe-details.css}">
+</head>
+<body>
+<div class="recipe position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-6 p-lg-6 mx-auto my-6">
+        <h1  th:text="${recipe.description}" class="display-4 fw-normal">Recipe description</h1>
+        <div class="lead fw-normal recipe-information">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>PREP TIME: <th:block th:text="${recipe.prepTime}" /> min</p>
+                </div>
+                <div class="col-md-6">
+                    <p>COOKING TIME:<th:block th:text="${recipe.cookTime}" /> min</p>
+                </div>
+            </div>
+            <div class="row">
+                <p>SERVINGS :<th:block th:text="${recipe.servings}" /></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="recipe">
+    <div class="recipe-ingredient">
+        <h2>Ingredients</h2>
+        <ul>
+            <li th:each="ingredient : ${recipe.ingredients}">
+                <span th:text="${T(guru.springframework.recipeapp.utility.NumberUtility).formatNumber(ingredient.amount) + ' '+ ingredient.unitOfMeasure.description + ' '+ ingredient.description}"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="recipe-preparation">
+        <h2>Preparations</h2>
+        <div class="recipe-preparation-direction" th:utext="${recipe.directions}"></div>
+    </div>
+</div>
+
+</body>
+</html>

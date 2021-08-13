@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(body,title,links)">
+<head th:replace="~{fragment/header :: common_header(${title},${links})}">
+</head>
+<body>
+<div class="page">
+  <div class="page-navigation">
+    <th:block th:insert="~{fragment/menu :: nav}" />
+  </div>
+  <div class="page-content container">
+    <th:block th:include="${body}" />
+  </div>
+  <div class="page-footer" th:insert="~{fragment/footer :: footer}">
+  </div>
+</div>
+
+
+</body>
+</html>

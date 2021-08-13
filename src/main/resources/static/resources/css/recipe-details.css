@@ -1,0 +1,7 @@
+.recipe-preparation-direction img {
+        max-width: 600px;
+        margin: 0 auto;
+        left: 50%;
+        margin-left: -300px;
+        position: relative;
+}
