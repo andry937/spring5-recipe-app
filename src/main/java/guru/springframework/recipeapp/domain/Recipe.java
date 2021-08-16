@@ -1,12 +1,15 @@
 package guru.springframework.recipeapp.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Recipe extends BaseDomain {
     private String description;
     private Integer prepTime;
@@ -30,4 +33,21 @@ public class Recipe extends BaseDomain {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories;
+
+    @Builder
+    public Recipe(Long id, String description, Integer prepTime, Integer cookTime, Integer servings, String source, String url, String directions, Byte[] image, Notes notes, Difficulty difficulty, Set<Ingredient> ingredients, Set<Category> categories) {
+        super(id);
+        this.description = description;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.servings = servings;
+        this.source = source;
+        this.url = url;
+        this.directions = directions;
+        this.image = image;
+        this.notes = notes;
+        this.difficulty = difficulty;
+        this.ingredients = ingredients;
+        this.categories = categories;
+    }
 }
