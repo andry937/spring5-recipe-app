@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CategoryTest {
     Category category;
@@ -21,10 +22,9 @@ class CategoryTest {
     }
 
     @Test
-    void getDescription() {
-    }
-
-    @Test
-    void getRecipes() {
+    void equality(){
+        Category first = Category.builder().id(1L).build();
+        Category second = Category.builder().id(2L).build();
+        assertNotEquals(first, second);
     }
 }
