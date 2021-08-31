@@ -20,7 +20,7 @@ public class IndexController {
         return "recipe/list";
     }
 
-    @RequestMapping("/{id}")
+    @RequestMapping("/recipes/{id}")
     public String getRecipeDetails(@PathVariable String id, Model model){
         model.addAttribute("recipe", recipeService.getRecipe(Long.valueOf(id)));
         return "recipe/details";
