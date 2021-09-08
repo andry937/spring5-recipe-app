@@ -10,8 +10,16 @@
     <a class="float-right" th:href="@{/recipes/create}">Add new recipe</a>
 </div>
 <ul class="list-group">
-    <li class="list-group-item list-group-item-action"  th:each="recipe : ${recipes}">
-        <a th:text="${recipe.description}" th:href="@{/recipes/} + ${recipe.id}"></a>
+    <li class="list-group-item list-group-item-action"
+        th:each="recipe : ${recipes}">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap">
+            <a th:text="${recipe.description}" th:href="@{/recipes/} + ${recipe.id}"></a>
+            <div class="btn-group btn-group-sm">
+                <a class="btn btn-outline-primary" th:href="@{/recipes/} + ${recipe.id}+'/update'">Update</a>
+                <a class="btn btn-outline-danger" th:href="@{/recipes/} + ${recipe.id}+'/delete'">Delete</a>
+            </div>
+        </div>
+
     </li>
 </ul>
 </body>
