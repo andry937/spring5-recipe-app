@@ -1,9 +1,9 @@
 package guru.springframework.recipeapp.services;
 
-import guru.springframework.recipeapp.domain.Category;
+import guru.springframework.recipeapp.commands.CategoryCommand;
 
 import java.util.Set;
 
 public interface CategoryService {
-    Set<Category> getAllCategories();
+    Set<CategoryCommand> getAllCategories();
 }

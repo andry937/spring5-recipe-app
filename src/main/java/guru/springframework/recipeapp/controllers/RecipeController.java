@@ -33,9 +33,15 @@ public class RecipeController {
 
     @RequestMapping("/create")
     public String createRecipe(Model model){
-        model.addAttribute("difficulties", Difficulty.values());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recipe", new RecipeCommand());
+        return "recipe/form";
+    }
+
+    @RequestMapping("/{id}/update")
+    public String updateRecipe(@PathVariable String id, Model model){
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("recipe", recipeService.getRecipeCommand(Long.valueOf(id)));
         return "recipe/form";
     }
 

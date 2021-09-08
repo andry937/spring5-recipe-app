@@ -15,18 +15,27 @@
                     <span th:each="category : ${recipe.categories}" class="badge bg-primary">
                         <th:block th:text="${category.description}"/>
                     </span>
+                    <th:block th:switch="${recipe.difficulty}">
+                        <span class="badge bg-primary" th:case="${T(guru.springframework.recipeapp.domain.Difficulty).EASY}"
+                              th:text="${recipe.difficulty}"></span>
+                        <span class="badge bg-warning" th:case="${T(guru.springframework.recipeapp.domain.Difficulty).MODERATE}"
+                              th:text="${recipe.difficulty}"></span>
+                        <span class="badge bg-danger" th:case="${T(guru.springframework.recipeapp.domain.Difficulty).HARD}"
+                              th:text="${recipe.difficulty}"></span>
+                    </th:block>
+
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <p>PREP TIME: <th:block th:text="${recipe.prepTime}" /> min</p>
+                    <span>PREP TIME: <th:block th:text="${recipe.prepTime}" /> min</span>
                 </div>
                 <div class="col-md-6">
-                    <p>COOKING TIME:<th:block th:text="${recipe.cookTime}" /> min</p>
+                    <span>COOKING TIME:<th:block th:text="${recipe.cookTime}" /> min</span>
                 </div>
             </div>
-            <div class="row">
-                <p>SERVINGS :<th:block th:text="${recipe.servings}" /></p>
+            <div class="row mb-3">
+                <span>SERVINGS :<th:block th:text="${recipe.servings}" /></span>
             </div>
             <div class="row">
                 <p>From:<a th:text="${recipe.source}" th:href="${recipe.url}"></a></p>
