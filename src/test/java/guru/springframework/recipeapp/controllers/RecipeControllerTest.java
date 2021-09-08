@@ -1,6 +1,7 @@
 package guru.springframework.recipeapp.controllers;
 
 import guru.springframework.recipeapp.domain.Recipe;
+import guru.springframework.recipeapp.services.CategoryService;
 import guru.springframework.recipeapp.services.RecipeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,23 +21,25 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class IndexControllerTest {
-    IndexController indexController;
+class RecipeControllerTest {
+    RecipeController recipeController;
     @Mock
     RecipeService recipeService;
+    @Mock
+    CategoryService categoryService;
     @Mock
     Model model;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        indexController = new IndexController(recipeService);
+        recipeController = new RecipeController(recipeService, categoryService);
 
     }
 
     @Test
     void testMockMVC() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/index"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("recipe/list"));
@@ -51,7 +54,7 @@ class IndexControllerTest {
         Mockito.when(recipeService.getAllRecipe()).thenReturn(recipes);
         //When
         ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
-        String viewName = indexController.listRecipes(model);
+        String viewName = recipeController.listRecipes(model);
 
         //Then
         assertEquals("recipe/list", viewName);

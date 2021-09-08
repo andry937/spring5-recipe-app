@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout (body=~{::body},title=~{::head/title},links=~{::link},scripts=~{::script})}">
+<head>
+    <title th:text="${'Recipe form'}"></title>
+    <link rel="stylesheet" th:href="@{/resources/css/recipe-form.css}">
+    <script th:src="@{/resources/js/tinymce.min.js}"></script>
+    <script>
+      tinymce.init({
+        selector: '.text-editor',
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help'
+      });
+    </script>
+</head>
+<body>
+    <div class="container-fluid mt-5">
+        <div class="recipe-form">
+            <h2>Recipe information</h2>
+            <form method="post" th:object="${recipe}" th:action="@{/recipes/}">
+                <input type="hidden" th:field="*{id}" />
+                <div class="recipe-form-title mb-3">
+                    <label for="recipe-title" class="form-label">Description</label>
+                    <input id="recipe-title" th:field="*{description}" class="form-control" type="text"/>
+                </div>
+                <div class="recipe-form-difficulty mb-3">
+                    <label class="form-label" for="recipe-difficulty">Difficulty</label>
+                    <select id="recipe-difficulty" name="difficulty" class="form-select">
+                        <option th:each="difficulty :${difficulties}" th:value="${difficulty}" th:text="${difficulty}"></option>
+                    </select>
+                </div>
+                <div class="recipe-form-category mb-3">
+                    <p>Categories</p>
+                    <div class="form-check" th:each="category :${categories}">
+                        <input class="form-check-input" type="checkbox"
+                               th:id="${'category-'+category.id}"
+                               name="categories"/>
+                        <label class="form-check-label"
+                               th:for="${'category-'+category.id}"
+                               th:text="${category.description}"></label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="recipe-form-preparation col">
+                        <label for="recipe-preparation" class="form-label">Preparation time</label>
+                        <input id="recipe-preparation" th:field="*{prepTime}" class="form-control" type="number"/>
+                    </div>
+                    <div class="recipe-form-cooking col">
+                        <label for="recipe-cooking" class="form-label">Cooking time</label>
+                        <input id="recipe-cooking" th:field="*{cookTime}" class="form-control" type="number"/>
+                    </div>
+                    <div class="recipe-form-servings col">
+                        <label for="recipe-servings" class="form-label">Servings</label>
+                        <input id="recipe-servings" th:field="*{servings}" class="form-control" type="number"/>
+                    </div>
+                </div>
+                <div class="recipe-form-source mb-3">
+                    <label for="recipe-source" class="form-label">Source</label>
+                    <input id="recipe-source" th:field="*{source}" class="form-control" type="text"/>
+                </div>
+                <div class="recipe-form-url mb-3">
+                    <label for="recipe-url" class="form-label">Url</label>
+                    <input id="recipe-url" th:field="*{url}" class="form-control" type="url" />
+                </div>
+                <div class="recipe-form-direction mb-3">
+                    <label for="recipe-direction" class="form-label">Directions</label>
+                    <textarea id="recipe-direction" th:field="*{directions}" class="form-control text-editor" rows="3"></textarea>
+                </div>
+
+                <hr />
+                <div class="recipe-form-note mb-3">
+                    <label for="recipe-note-description" class="form-label">Notes</label>
+                    <textarea id="recipe-note-description"
+                              rows="3"
+                              th:field="*{notes.recipeNotes}" class="form-control text-editor"></textarea>
+                </div>
+                <button class="btn btn-success" type="submit" th:text="${'Create'}"></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

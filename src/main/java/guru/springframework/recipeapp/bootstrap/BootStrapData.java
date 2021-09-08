@@ -36,7 +36,7 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Category mexican = categoryRepository.findByDescription("Mexican").get();
+        Category mexican = categoryRepository.findByDescription("Mexican").orElseThrow(()->new RuntimeException("Category no found"));
         Set<Category> categories = new HashSet<>();
         categories.add(mexican);
 
@@ -69,7 +69,7 @@ public class BootStrapData implements CommandLineRunner {
         //		1/4 Teaspoon salt, plus more to taste
         Ingredient salt = new Ingredient();
         salt.setDescription("salt, plus more to taste");
-        salt.setAmount(new BigDecimal(0.25));
+        salt.setAmount(new BigDecimal("0.25"));
         salt.setUnitOfMeasure(maps.get("Teaspoon"));
         ingredients.add(salt);
         //		1 Tablespoon fresh lime or lemon juice
@@ -105,7 +105,7 @@ public class BootStrapData implements CommandLineRunner {
         //		1/2 ripe tomato, chopped (optional)
         Ingredient tomato = new Ingredient();
         tomato.setDescription("ripe tomato, chopped (optional)");
-        tomato.setAmount(new BigDecimal(0.5));
+        tomato.setAmount(new BigDecimal("0.5"));
         tomato.setUnitOfMeasure(maps.get("Each"));
         ingredients.add(tomato);
         //		Red radish or jicama slices for garnish (optional)
@@ -118,7 +118,7 @@ public class BootStrapData implements CommandLineRunner {
         recipeRepository.save(guacamole);
 
         //Chicken recipe
-        Category american = categoryRepository.findByDescription("American").get();
+        Category american = categoryRepository.findByDescription("American").orElseThrow(()->new RuntimeException("Category no found"));
         categories = new HashSet<>();
         categories.add(american);
         ingredients = new HashSet<>();
@@ -165,7 +165,7 @@ public class BootStrapData implements CommandLineRunner {
 //        1/2 Teaspoon salt
         salt = new Ingredient();
         salt.setDescription("salt");
-        salt.setAmount(new BigDecimal(0.5));
+        salt.setAmount(new BigDecimal("0.5"));
         salt.setUnitOfMeasure(maps.get("Teaspoon"));
         ingredients.add(salt);
 //        1 clove garlic, finely chopped
@@ -226,13 +226,13 @@ public class BootStrapData implements CommandLineRunner {
 //        1/2 pint cherry tomatoes, halved
         Ingredient tomatoes = new Ingredient();
         tomatoes.setDescription("cherry tomatoes, halved");
-        tomatoes.setAmount(new BigDecimal(0.5));
+        tomatoes.setAmount(new BigDecimal("0.5"));
         tomatoes.setUnitOfMeasure(maps.get("Pint"));
         ingredients.add(tomatoes);
 //        1/4 red onion, thinly sliced
         onion = new Ingredient();
         onion.setDescription("red onion, thinly sliced");
-        onion.setAmount(new BigDecimal(0.25));
+        onion.setAmount(new BigDecimal("0.25"));
         onion.setUnitOfMeasure(maps.get("Each"));
         ingredients.add(onion);
 //        Roughly chopped cilantro
@@ -244,7 +244,7 @@ public class BootStrapData implements CommandLineRunner {
 //        1/2 Cup sour cream thinned with 1/4 Cup milk
         Ingredient milk = new Ingredient();
         milk.setDescription("sour cream thinned with 1/4 Cup milk");
-        milk.setAmount(new BigDecimal(0.5));
+        milk.setAmount(new BigDecimal("0.5"));
         milk.setUnitOfMeasure(maps.get("Cup"));
         ingredients.add(milk);
 //        1 lime, cut into wedges

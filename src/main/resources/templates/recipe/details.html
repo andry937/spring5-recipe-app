@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{fragment/layout :: layout (~{::body},~{::head/title},~{::link})}">
+      th:replace="~{fragment/layout :: layout (body=~{::body},title=~{::head/title},links=~{::link})}">
 <head>
     <title th:text="${recipe.description}"></title>
     <link rel="stylesheet" th:href="@{/resources/css/recipe-details.css}">
@@ -28,6 +28,9 @@
             <div class="row">
                 <p>SERVINGS :<th:block th:text="${recipe.servings}" /></p>
             </div>
+            <div class="row">
+                <p>From:<a th:text="${recipe.source}" th:href="${recipe.url}"></a></p>
+            </div>
         </div>
     </div>
 </div>
@@ -43,6 +46,8 @@
     <div class="recipe-preparation">
         <h2>Preparations</h2>
         <div class="recipe-preparation-direction" th:utext="${recipe.directions}"></div>
+    </div>
+    <div class="recipe-notes mb-3" th:utext="${recipe.notes.recipeNotes}">
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="common_header(title,links)">
+<head th:fragment="common_header(title,links,scripts)">
 
   <title th:replace="${title}">The awesome application</title>
 
@@ -20,6 +20,8 @@
 
   <!--/* Per-page placeholder for additional links */-->
   <th:block th:replace="${links}" />
+
+  <th:block th:replace="${scripts}" />
 
 </head>
 </html>

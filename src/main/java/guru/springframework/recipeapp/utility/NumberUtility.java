@@ -19,7 +19,7 @@ public final class NumberUtility {
         }
         numerator *= denominator;
         int gcd = getGCD((int)numerator, denominator);
-        return (int)(numerator/gcd)+"/"+(int)(denominator/gcd);
+        return (int)(numerator/gcd)+"/"+ (denominator/gcd);
     }
 
     private static int getGCD(int n1, int n2) {

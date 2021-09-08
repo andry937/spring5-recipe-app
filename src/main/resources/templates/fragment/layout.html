@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(body,title,links)">
-<head th:replace="~{fragment/header :: common_header(${title},${links})}">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(body,title)"
+      th:with="scripts=${scripts} ?: ~{},links=${links}?: ~{}">
+<head th:replace="~{fragment/header :: common_header(${title},${links},${scripts})}">
 </head>
 <body>
 <div class="page">

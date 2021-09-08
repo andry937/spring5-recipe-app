@@ -1,7 +1,6 @@
 package guru.springframework.recipeapp.repository;
 
 import guru.springframework.recipeapp.domain.UnitOfMeasure;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,15 @@ class UnitOfMeasureRepositoryTestIT {
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
     void findByDescriptionTeaspoon() {
         Optional<UnitOfMeasure> value = unitOfMeasureRepository.findByDescription("Teaspoon");
-        assertEquals("Teaspoon", value.get().getDescription());
+        assertEquals("Teaspoon", value.orElseThrow(()->new RuntimeException("Category no found")).getDescription());
     }
 
     @Test
     void findByDescriptionCup() {
         Optional<UnitOfMeasure> value = unitOfMeasureRepository.findByDescription("Cup");
-        assertEquals("Cup", value.get().getDescription());
+        assertEquals("Cup", value.orElseThrow(()->new RuntimeException("Category no found")).getDescription());
     }
 }
