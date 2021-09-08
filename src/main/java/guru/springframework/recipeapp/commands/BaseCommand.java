@@ -1,6 +1,5 @@
 package guru.springframework.recipeapp.commands;
 
-import guru.springframework.recipeapp.domain.BaseDomain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

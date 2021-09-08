@@ -17,7 +17,7 @@ public class UnitOfMeasureFormatter implements Formatter<UnitOfMeasureCommand> {
     }
 
     @Override
-    public UnitOfMeasureCommand parse(String id, Locale locale) throws ParseException {
+    public UnitOfMeasureCommand parse(String id, Locale locale) {
         return unitOfMeasureService.getUnitOfMeasureCommandById(Long.valueOf(id));
     }
 

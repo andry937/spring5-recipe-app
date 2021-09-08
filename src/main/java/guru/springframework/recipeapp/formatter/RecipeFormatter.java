@@ -17,7 +17,7 @@ public class RecipeFormatter implements Formatter<RecipeCommand> {
     }
 
     @Override
-    public RecipeCommand parse(String id, Locale locale) throws ParseException {
+    public RecipeCommand parse(String id, Locale locale) {
         return recipeService.getRecipe(Long.valueOf(id));
     }
 

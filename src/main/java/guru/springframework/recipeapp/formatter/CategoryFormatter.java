@@ -17,7 +17,7 @@ public class CategoryFormatter implements Formatter<CategoryCommand> {
     }
 
     @Override
-    public CategoryCommand parse(String id, Locale locale) throws ParseException {
+    public CategoryCommand parse(String id, Locale locale) {
         return categoryService.getCategoryCommand(Long.valueOf(id));
     }
 

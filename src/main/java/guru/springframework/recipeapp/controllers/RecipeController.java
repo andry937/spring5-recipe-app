@@ -1,7 +1,6 @@
 package guru.springframework.recipeapp.controllers;
 
 import guru.springframework.recipeapp.commands.RecipeCommand;
-import guru.springframework.recipeapp.domain.Difficulty;
 import guru.springframework.recipeapp.services.CategoryService;
 import guru.springframework.recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
