@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class IngredientToIngredientCommand implements Converter<Ingredient, IngredientCommand> {
     private final UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureConvert;
+    private final RecipeOnlyToRecipeCommand recipeCommand;
 
-    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureConvert) {
+    public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureConvert, RecipeOnlyToRecipeCommand recipeCommand) {
         this.unitOfMeasureConvert = unitOfMeasureConvert;
+        this.recipeCommand = recipeCommand;
     }
 
     @Synchronized
@@ -27,6 +29,7 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
                 .description(ingredient.getDescription())
                 .amount(ingredient.getAmount())
                 .unitOfMeasure(unitOfMeasureConvert.convert(ingredient.getUnitOfMeasure()))
+                .recipe(recipeCommand.convert(ingredient.getRecipe()))
                 .build();
     }
 }

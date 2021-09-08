@@ -33,7 +33,7 @@ public class RecipeCommandToRecipeTest {
     @BeforeEach
     public void setUp() {
         converter = new RecipeCommandToRecipe(new CategoryCommandToCategory(),
-                new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
+                new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure(), new RecipeCommandToRecipeOnly(new NotesCommandToNotes())),
                 new NotesCommandToNotes());
     }
 

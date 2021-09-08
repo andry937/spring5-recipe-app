@@ -23,7 +23,7 @@ public class IngredientCommandToIngredientTest {
 
     @BeforeEach
     public void setUp() {
-        converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
+        converter = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure(), new RecipeCommandToRecipeOnly(new NotesCommandToNotes()));
     }
 
     @Test

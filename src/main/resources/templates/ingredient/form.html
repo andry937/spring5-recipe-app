@@ -21,8 +21,6 @@
             </div>
 
             <div class="ingredient-form-recipe mb-3">
-                <p th:text="${recipes}"></p>
-                <p th:text="*{recipe}"></p>
                 <label class="form-label" for="ingredient-recipe">Recipe</label>
                 <select id="ingredient-recipe" name="recipe" class="form-select" th:field="*{recipe}">
                     <option th:each="recipe :${recipes}"
