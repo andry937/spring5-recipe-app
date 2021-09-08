@@ -56,6 +56,7 @@ public class BootStrapData implements CommandLineRunner {
         guacamole.setDescription("the Best Guacamole");
         guacamole.setDirections(loadFile("data/guacamole.txt"));
         guacamole.setDifficulty(Difficulty.EASY);
+        guacamole.setSource("Simply Recipes");
         guacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
         guacamole.setNotes(notes);
 
@@ -135,6 +136,7 @@ public class BootStrapData implements CommandLineRunner {
         chicken.setDescription("Spicy Grilled Chicken Tacos");
         chicken.setDirections(loadFile("data/chicken.txt"));
         chicken.setDifficulty(Difficulty.MODERATE);
+        chicken.setSource("Simply Recipes");
         chicken.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
         chicken.setNotes(notes);
 //        For the chicken:

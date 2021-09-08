@@ -62,7 +62,7 @@ class RecipeControllerTest {
     @Test
     void testMockMVC() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
-        mockMvc.perform(MockMvcRequestBuilders.get("/index"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipes/index"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.view().name("recipe/list"));
     }
