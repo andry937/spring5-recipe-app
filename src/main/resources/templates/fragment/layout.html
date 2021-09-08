@@ -5,13 +5,11 @@
 </head>
 <body>
 <div class="page">
-  <div class="page-navigation">
+  <div class="page-navigation mb-3">
     <th:block th:insert="~{fragment/menu :: nav}" />
   </div>
   <div class="page-content container">
     <th:block th:include="${body}" />
-  </div>
-  <div class="page-footer" th:insert="~{fragment/footer :: footer}">
   </div>
 </div>
 
