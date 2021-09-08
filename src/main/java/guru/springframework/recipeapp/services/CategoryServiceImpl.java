@@ -24,4 +24,9 @@ public class CategoryServiceImpl implements CategoryService{
         categoryRepository.findAll().forEach(category -> categories.add(categoryToCategoryCommand.convert(category)));
         return categories;
     }
+
+    @Override
+    public CategoryCommand getCategoryCommand(Long id) {
+        return categoryToCategoryCommand.convert(categoryRepository.findById(id).orElse(null));
+    }
 }

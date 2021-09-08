@@ -45,7 +45,7 @@
                                name="categories-nsfw"
                                th:value="${category.id}"
                                th:id="${'categories'+category.id}"
-                               th:checked="${recipe.categories.contains(category)}"
+                               th:field="*{categories}"
                         />
                         <label class="form-check-label"
                                th:for="${'categories'+category.id}"

@@ -6,4 +6,6 @@ import java.util.Set;
 
 public interface CategoryService {
     Set<CategoryCommand> getAllCategories();
+
+    CategoryCommand getCategoryCommand(Long id);
 }
