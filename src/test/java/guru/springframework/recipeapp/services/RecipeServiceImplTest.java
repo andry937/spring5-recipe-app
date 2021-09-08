@@ -40,7 +40,7 @@ class RecipeServiceImplTest {
     }
     @Test
     void getAllRecipe() {
-        Set<Recipe> recipes = recipeService.getAllRecipe();
+        Set<RecipeCommand> recipes = recipeService.getAllRecipe();
         assertEquals(1, recipes.size());
         Mockito.verify(recipeRepository, Mockito.times(1)).findAll();
     }

@@ -41,7 +41,7 @@ public class RecipeController {
     @RequestMapping("/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
         model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("recipe", recipeService.getRecipeCommand(Long.valueOf(id)));
+        model.addAttribute("recipe", recipeService.getRecipe(Long.valueOf(id)));
         return "recipe/form";
     }
 

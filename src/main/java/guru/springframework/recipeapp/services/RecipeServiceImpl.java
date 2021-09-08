@@ -25,21 +25,18 @@ public class RecipeServiceImpl implements RecipeService{
         this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
 
-    public Set<Recipe> getAllRecipe() {
-        Set<Recipe> recipes = new HashSet<>();
-        this.recipeRepository.findAll().forEach(recipes::add);
+    @Override
+    @Transactional
+    public Set<RecipeCommand> getAllRecipe() {
+        Set<RecipeCommand> recipes = new HashSet<>();
+        this.recipeRepository.findAll().forEach(recipe -> recipes.add(recipeToRecipeCommand.convert(recipe)));
         return recipes;
-    }
-
-    public Recipe getRecipe(Long id){
-        return recipeRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
-    public RecipeCommand getRecipeCommand(Long id) {
-        Recipe recipe = getRecipe(id);
-        return recipeToRecipeCommand.convert(recipe);
+    public RecipeCommand getRecipe(Long id){
+        return recipeToRecipeCommand.convert(recipeRepository.findById(id).orElse(null));
     }
 
     @Override

@@ -35,7 +35,7 @@ class RecipeControllerTest {
     @Mock
     Model model;
 
-    Set<Recipe> recipes;
+    Set<RecipeCommand> recipes;
 
     Long id = 4L;
 
@@ -47,15 +47,14 @@ class RecipeControllerTest {
         recipeController = new RecipeController(recipeService, categoryService);
 
         recipes = new HashSet<>();
-        recipes.add(Recipe.builder().id(id).description("desc").build());
-        recipes.add(Recipe.builder().id(5L).description("desc 2").build());
+        recipes.add(RecipeCommand.builder().id(id).description("desc").build());
+        recipes.add(RecipeCommand.builder().id(5L).description("desc 2").build());
 
         mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
 
-        Mockito.when(recipeService.getRecipe(Mockito.anyLong())).thenReturn(new Recipe());
+        Mockito.when(recipeService.getRecipe(Mockito.anyLong())).thenReturn(new RecipeCommand());
         Mockito.when(recipeService.saveRecipeCommand(Mockito.any(RecipeCommand.class)))
                 .thenReturn(RecipeCommand.builder().id(id).build());
-        Mockito.when(recipeService.getRecipeCommand(Mockito.anyLong())).thenReturn(new RecipeCommand());
 
     }
 

@@ -13,10 +13,10 @@
     <li class="list-group-item list-group-item-action"
         th:each="ingredient : ${ingredients}">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap">
-            <a th:text="${#strings.capitalize(ingredient.description)}" th:href="@{/ingredient/} + ${ingredient.id}"></a>
+            <a th:text="${#strings.capitalize(ingredient.description)}" th:href="@{/ingredients/} + ${ingredient.id}"></a>
             <div class="btn-group btn-group-sm">
-                <a class="btn btn-outline-primary" th:href="@{/ingredient/} + ${ingredient.id}+'/update'">Update</a>
-                <a class="btn btn-outline-danger" th:href="@{/ingredient/} + ${ingredient.id}+'/delete'">Delete</a>
+                <a class="btn btn-outline-primary" th:href="@{/ingredients/} + ${ingredient.id}+'/update'">Update</a>
+                <a class="btn btn-outline-danger" th:href="@{/ingredients/} + ${ingredient.id}+'/delete'">Delete</a>
             </div>
         </div>
 

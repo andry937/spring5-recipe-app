@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout (~{::body},~{::head/title})}">
+<head>
+    <title th:text="${'Ingredient form'}"></title>
+</head>
+<body>
+<div class="container-fluid mt-5">
+    <div class="ingredient-form">
+        <h2>Ingredient information</h2>
+        <form method="post" th:object="${ingredient}" th:action="@{/ingredients/}">
+            <input type="hidden" th:field="*{id}" />
+            <div class="ingredient-form-title mb-3">
+                <label for="ingredient-title" class="form-label">Description</label>
+                <input id="ingredient-title" th:field="*{description}" class="form-control" type="text"/>
+            </div>
+
+            <div class="ingredient-form-amount mb-3">
+                <label for="ingredient-amount" class="form-label">Amount</label>
+                <input id="ingredient-amount" th:field="*{amount}" class="form-control" type="number"/>
+            </div>
+
+            <div class="ingredient-form-recipe mb-3">
+                <p th:text="${recipes}"></p>
+                <p th:text="*{recipe}"></p>
+                <label class="form-label" for="ingredient-recipe">Recipe</label>
+                <select id="ingredient-recipe" name="recipe" class="form-select" th:field="*{recipe}">
+                    <option th:each="recipe :${recipes}"
+                            th:value="${recipe.id}" th:text="${recipe.description}"></option>
+                </select>
+            </div>
+
+            <div class="ingredient-form-uom mb-3">
+                <label class="form-label" for="ingredient-uom">Unit of measure</label>
+                <select id="ingredient-uom" name="unitOfMeasure" class="form-select" th:field="*{unitOfMeasure}">
+                    <option th:each="uom :${uoms}"
+                            th:value="${uom.id}" th:text="${uom.description}"></option>
+                </select>
+            </div>
+            
+            <button class="btn btn-success" type="submit" th:text="${'Submit'}"></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

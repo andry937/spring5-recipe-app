@@ -1,10 +1,11 @@
 package guru.springframework.recipeapp.controllers;
 
 import guru.springframework.recipeapp.services.IngredientService;
+import guru.springframework.recipeapp.services.RecipeService;
+import guru.springframework.recipeapp.services.UnitOfMeasureService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -16,14 +17,20 @@ public class IngredientControllerTest {
     IngredientController ingredientController;
     @Mock
     IngredientService ingredientService;
+    @Mock
+    UnitOfMeasureService unitOfMeasureService;
+    @Mock
+    RecipeService recipeService;
+
     MockMvc mockMvc;
 
     Long recipeId = 1L;
+    Long ingredientId = 1L;
 
     @BeforeEach
     void setup(){
         MockitoAnnotations.openMocks(this);
-        ingredientController = new IngredientController(ingredientService);
+        ingredientController = new IngredientController(ingredientService, unitOfMeasureService, recipeService);
         mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
     }
 
@@ -33,5 +40,14 @@ public class IngredientControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("ingredient/list"))
                 .andExpect(model().attributeExists("ingredients"));
+    }
+
+    @Test
+    void testUpdateIngredient() throws Exception {
+        mockMvc.perform(get("/ingredient/"+ingredientId+"/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("ingredient/form"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uoms"));
     }
 }
