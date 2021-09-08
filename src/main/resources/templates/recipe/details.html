@@ -45,7 +45,7 @@
 </div>
 <div class="recipe">
     <div class="recipe-ingredient">
-        <h2>Ingredients</h2>
+        <h2><a th:href="@{/recipes/} + ${recipe.id}+'/ingredients'">Ingredients</a></h2>
         <ul>
             <li th:each="ingredient : ${recipe.ingredients}">
                 <th:block th:text="${T(guru.springframework.recipeapp.utility.NumberUtility).formatNumber(ingredient.amount) + ' '+ ingredient.unitOfMeasure.description + ' '+ ingredient.description}" />

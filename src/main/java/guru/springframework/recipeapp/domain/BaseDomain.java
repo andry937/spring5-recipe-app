@@ -16,7 +16,7 @@ import java.util.Objects;
 public abstract class BaseDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
     @Override
     public boolean equals(Object o) {
