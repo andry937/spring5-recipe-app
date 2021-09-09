@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragment/layout :: layout (body=~{::body},title=~{::head/title})}">
+<head>
+    <title th:text="${ingredient.description}"></title>
+</head>
+<body>
+<div class="ingredient position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-6 p-lg-6 mx-auto my-6">
+        <h1  th:text="${ingredient.description}" class="display-4 fw-normal">ingredient description</h1>
+        <div class="ingredient">
+            <p>Used in : <span class="ingredient-recipe" th:text="${ingredient.recipe.description}"></span></p>
+            <p>Amount : <span class="ingredient-amount" th:text="${ingredient.amount}"></span></p>
+            <p>Unit of measure : <span class="ingredient-measure" th:text="${ingredient.unitOfMeasure.description}"></span></p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

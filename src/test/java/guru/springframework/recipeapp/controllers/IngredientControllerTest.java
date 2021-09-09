@@ -45,6 +45,14 @@ public class IngredientControllerTest {
     }
 
     @Test
+    void testShowIngredient() throws Exception {
+        mockMvc.perform(get("/ingredients/"+ingredientId))
+                .andExpect(status().isOk())
+                .andExpect(view().name("ingredient/details"))
+                .andExpect(model().attributeExists("ingredient"));
+    }
+
+    @Test
     void testUpdateIngredient() throws Exception {
         mockMvc.perform(get("/ingredients/"+ingredientId+"/update"))
                 .andExpect(status().isOk())

@@ -36,6 +36,13 @@ public class IngredientController {
         return "ingredient/list";
     }
 
+    @RequestMapping("/ingredients/{id}")
+    public String showIngredientDetails(@PathVariable String id, Model model){
+        IngredientCommand ingredient = ingredientService.findById(Long.valueOf(id));
+        model.addAttribute("ingredient", ingredient);
+        return "ingredient/details";
+    }
+
     @RequestMapping("/ingredients/{id}/update")
     public String updateIngredient(@PathVariable String id, Model model){
         IngredientCommand ingredient = ingredientService.findById(Long.valueOf(id));
