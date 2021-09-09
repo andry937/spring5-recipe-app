@@ -60,4 +60,13 @@ public class IngredientControllerTest {
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uoms"));
     }
+
+    @Test
+    void testCreateIngredient() throws Exception {
+        mockMvc.perform(get("/ingredients/create"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("ingredient/form"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uoms"));
+    }
 }

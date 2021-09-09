@@ -43,6 +43,16 @@ public class IngredientController {
         return "ingredient/details";
     }
 
+    @RequestMapping("/ingredients/create")
+    public String createIngredient(Model model){
+        Set<UnitOfMeasure> unitOfMeasures = unitOfMeasureService.findAll();
+        Set<RecipeCommand> recipeCommands = recipeService.getAllRecipe();
+        model.addAttribute("ingredient", new IngredientCommand());
+        model.addAttribute("uoms", unitOfMeasures);
+        model.addAttribute("recipes", recipeCommands);
+        return "ingredient/form";
+    }
+
     @RequestMapping("/ingredients/{id}/update")
     public String updateIngredient(@PathVariable String id, Model model){
         IngredientCommand ingredient = ingredientService.findById(Long.valueOf(id));
