@@ -1,6 +1,7 @@
 package guru.springframework.recipeapp.controllers;
 
 import guru.springframework.recipeapp.commands.IngredientCommand;
+import guru.springframework.recipeapp.commands.RecipeCommand;
 import guru.springframework.recipeapp.services.IngredientService;
 import guru.springframework.recipeapp.services.RecipeService;
 import guru.springframework.recipeapp.services.UnitOfMeasureService;
@@ -33,7 +34,10 @@ public class IngredientControllerTest {
         MockitoAnnotations.openMocks(this);
         ingredientController = new IngredientController(ingredientService, unitOfMeasureService, recipeService);
         mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
-        Mockito.when(ingredientService.findById(Mockito.anyLong())).thenReturn(new IngredientCommand());
+        Mockito.when(ingredientService.findById(Mockito.anyLong()))
+                .thenReturn(IngredientCommand.builder()
+                        .recipe(RecipeCommand.builder().id(recipeId).build())
+                        .build());
     }
 
     @Test
@@ -68,5 +72,13 @@ public class IngredientControllerTest {
                 .andExpect(view().name("ingredient/form"))
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uoms"));
+    }
+
+    @Test
+    void testDeleteIngredient() throws Exception {
+        mockMvc.perform(get("/ingredients/"+ingredientId+"/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipes/"+recipeId+"/ingredients"));
+        Mockito.verify(ingredientService, Mockito.times(1)).deleteById(Mockito.anyLong());
     }
 }

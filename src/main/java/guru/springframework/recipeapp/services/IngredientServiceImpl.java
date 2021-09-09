@@ -40,4 +40,9 @@ public class IngredientServiceImpl implements IngredientService {
         Ingredient saved = ingredientRepository.save(detached);
         return ingredientToIngredientCommand.convert(saved);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        ingredientRepository.deleteById(id);
+    }
 }
