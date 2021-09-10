@@ -1,8 +1,13 @@
 package guru.springframework.recipeapp.commands;
 
-import guru.springframework.recipeapp.domain.*;
-import lombok.*;
+import guru.springframework.recipeapp.domain.Difficulty;
+import guru.springframework.recipeapp.utility.ByteUtility;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,5 +43,16 @@ public class RecipeCommand extends BaseCommand {
         this.difficulty = difficulty;
         this.ingredients = ingredients;
         this.categories = categories;
+    }
+
+    public String getImageUrl() {
+        if(this.image == null){
+            return "";
+        }
+        try {
+            return "data:image/jpeg;base64," + ByteUtility.toBase64(this.image);
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
     }
 }

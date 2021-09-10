@@ -9,3 +9,7 @@
 .recipe-notes *{
     font-size: 1rem!important;
 }
+
+.recipe-image img{
+    max-height: 200px;
+}
