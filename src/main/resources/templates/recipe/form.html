@@ -25,7 +25,7 @@
     <div class="container-fluid mt-5">
         <div class="recipe-form">
             <h2>Recipe information</h2>
-            <form method="post" th:object="${recipe}" th:action="@{/recipes/}">
+            <form method="post" th:object="${recipe}" th:action="@{/recipes/}" enctype="multipart/form-data">
                 <input type="hidden" th:field="*{id}" />
                 <div class="recipe-form-title mb-3">
                     <label for="recipe-title" class="form-label">Description</label>
@@ -65,6 +65,10 @@
                         <label for="recipe-servings" class="form-label">Servings</label>
                         <input id="recipe-servings" th:field="*{servings}" class="form-control" type="number"/>
                     </div>
+                </div>
+                <div class="recipe-form-image mb-3">
+                    <label for="recipe-image" class="form-label">Image</label>
+                    <input id="recipe-image" name="recipe-image" class="form-control" type="file"/>
                 </div>
                 <div class="recipe-form-source mb-3">
                     <label for="recipe-source" class="form-label">Source</label>

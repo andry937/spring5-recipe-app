@@ -3,9 +3,13 @@ package guru.springframework.recipeapp.controllers;
 import guru.springframework.recipeapp.commands.RecipeCommand;
 import guru.springframework.recipeapp.services.CategoryService;
 import guru.springframework.recipeapp.services.RecipeService;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequestMapping("/recipes")
 @Controller
@@ -44,9 +48,9 @@ public class RecipeController {
         return "recipe/form";
     }
 
-    @PostMapping({"/",""})
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command){
-        RecipeCommand savedRecipe = recipeService.saveRecipeCommand(command);
+    @PostMapping(value = {"/",""},consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command, @RequestPart("recipe-image") MultipartFile image) throws IOException {
+        RecipeCommand savedRecipe = recipeService.saveRecipeCommand(command, image);
         return "redirect:/recipes/"+savedRecipe.getId();
     }
 

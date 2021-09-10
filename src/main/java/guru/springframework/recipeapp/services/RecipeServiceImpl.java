@@ -5,10 +5,13 @@ import guru.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import guru.springframework.recipeapp.converters.RecipeToRecipeCommand;
 import guru.springframework.recipeapp.domain.Recipe;
 import guru.springframework.recipeapp.repository.RecipeRepository;
+import guru.springframework.recipeapp.utility.ByteUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,7 +45,21 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand) {
+        try {
+            return saveRecipeCommand(recipeCommand, null);
+        } catch (IOException e) {
+            //Exception ignored
+            return null;
+        }
+    }
+
+    @Override
+    public RecipeCommand saveRecipeCommand(RecipeCommand recipeCommand, MultipartFile image) throws IOException {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(recipeCommand);
+        if(image != null){
+            Byte[] bytesImage = ByteUtility.toObjects(image.getBytes());
+            detachedRecipe.setImage(bytesImage);
+        }
         Recipe savedRecipe = recipeRepository.save(detachedRecipe);
         return recipeToRecipeCommand.convert(savedRecipe);
     }
