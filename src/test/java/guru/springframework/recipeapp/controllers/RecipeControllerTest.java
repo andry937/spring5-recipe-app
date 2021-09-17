@@ -10,20 +10,21 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 class RecipeControllerTest {
@@ -110,10 +111,14 @@ class RecipeControllerTest {
 
     @Test
     void createOrUpdateRecipe() throws Exception{
-        mockMvc.perform(post("/recipes")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+        Mockito.when(recipeService.saveRecipeCommand(Mockito.any(RecipeCommand.class), Mockito.any(MultipartFile.class)))
+                .thenReturn(RecipeCommand.builder().id(id).build());
+        MockMultipartFile firstFile = new MockMultipartFile("recipe-image", "filename.txt", "text/plain", "some xml".getBytes());
+        mockMvc.perform(multipart("/recipes")
+                        .file(firstFile)
                         .param("id", "")
-                        .param("description", "some string"))
+                        .param("description", "some string")
+                )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipes/"+id));
     }
