@@ -2,6 +2,8 @@ package guru.springframework.recipeapp.services;
 
 import guru.springframework.recipeapp.commands.CategoryCommand;
 import guru.springframework.recipeapp.converters.CategoryToCategoryCommand;
+import guru.springframework.recipeapp.domain.Category;
+import guru.springframework.recipeapp.exceptions.NotFoundException;
 import guru.springframework.recipeapp.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryCommand getCategoryCommand(Long id) {
-        return categoryToCategoryCommand.convert(categoryRepository.findById(id).orElse(null));
+        Category category = categoryRepository.findById(id).orElseThrow(NotFoundException::new);
+        return categoryToCategoryCommand.convert(category);
     }
 }

@@ -3,6 +3,7 @@ package guru.springframework.recipeapp.services;
 import guru.springframework.recipeapp.commands.UnitOfMeasureCommand;
 import guru.springframework.recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import guru.springframework.recipeapp.domain.UnitOfMeasure;
+import guru.springframework.recipeapp.exceptions.NotFoundException;
 import guru.springframework.recipeapp.repository.UnitOfMeasureRepository;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,8 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
     @Override
     public UnitOfMeasureCommand getUnitOfMeasureCommandById(Long id) {
-        return unitOfMeasureCommand.convert(this.unitOfMeasureRepository.findById(id).orElse(null));
+        UnitOfMeasure unitOfMeasure = this.unitOfMeasureRepository.findById(id).orElseThrow(NotFoundException::new);
+        return unitOfMeasureCommand.convert(unitOfMeasure);
     }
 
 }

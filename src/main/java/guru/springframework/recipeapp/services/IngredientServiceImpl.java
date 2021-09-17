@@ -4,6 +4,7 @@ import guru.springframework.recipeapp.commands.IngredientCommand;
 import guru.springframework.recipeapp.converters.IngredientCommandToIngredient;
 import guru.springframework.recipeapp.converters.IngredientToIngredientCommand;
 import guru.springframework.recipeapp.domain.Ingredient;
+import guru.springframework.recipeapp.exceptions.NotFoundException;
 import guru.springframework.recipeapp.repository.IngredientRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,8 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     @Transactional
     public IngredientCommand findById(Long id) {
-        return this.ingredientToIngredientCommand.convert(ingredientRepository.findById(id).orElse(null));
+        Ingredient ingredient = ingredientRepository.findById(id).orElseThrow(NotFoundException::new);
+        return this.ingredientToIngredientCommand.convert(ingredient);
     }
 
 
