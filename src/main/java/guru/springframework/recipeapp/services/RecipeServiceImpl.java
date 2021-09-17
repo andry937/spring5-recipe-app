@@ -51,6 +51,7 @@ public class RecipeServiceImpl implements RecipeService{
             return saveRecipeCommand(recipeCommand, null);
         } catch (IOException e) {
             //Exception ignored
+            e.printStackTrace();
             return null;
         }
     }
