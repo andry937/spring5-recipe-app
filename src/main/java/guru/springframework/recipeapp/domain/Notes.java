@@ -8,8 +8,6 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -17,10 +15,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class Notes extends BaseDomain {
     @OneToOne
-    @NotNull
     private Recipe recipe;
     @Lob
-    @NotBlank
     private String recipeNotes;
 
     @Builder

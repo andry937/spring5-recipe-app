@@ -4,13 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,26 +14,13 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class Recipe extends BaseDomain {
-    @NotBlank
-    @Size(min = 3, max = 255)
     private String description;
-    @Min(1)
-    @Max(999)
     private Integer prepTime;
-    @Min(1)
-    @Max(999)
     private Integer cookTime;
-    @Min(1)
-    @Max(999)
     private Integer servings;
-    @NotBlank
-    @Size(min = 3, max = 255)
     private String source;
-    @URL
-    @NotBlank
     private String url;
     @Lob
-    @NotBlank
     private String directions;
     @Lob
     private Byte[] image;

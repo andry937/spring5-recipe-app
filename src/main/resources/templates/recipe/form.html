@@ -29,14 +29,26 @@
                 <input type="hidden" th:field="*{id}" />
                 <div class="recipe-form-title mb-3">
                     <label for="recipe-title" class="form-label">Description</label>
-                    <input id="recipe-title" th:field="*{description}" class="form-control" type="text"/>
+                    <input id="recipe-title" th:field="*{description}"
+                           class="form-control" type="text"
+                           th:classappend="${#fields.hasErrors('description')?'is-invalid':''}"
+                    />
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('description')}">
+                        <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <div class="recipe-form-difficulty mb-3">
                     <label class="form-label" for="recipe-difficulty">Difficulty</label>
-                    <select id="recipe-difficulty" name="difficulty" class="form-select" th:field="*{difficulty}">
+                    <select id="recipe-difficulty" name="difficulty"
+                            class="form-select" th:field="*{difficulty}"
+                            th:classappend="${#fields.hasErrors('difficulty')?'is-invalid':''}"
+                    >
                         <option th:each="difficulty :${T(guru.springframework.recipeapp.domain.Difficulty).values()}"
                                 th:value="${difficulty}" th:text="${difficulty}"></option>
                     </select>
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('difficulty')}">
+                        <li th:each="err : ${#fields.errors('difficulty')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <div class="recipe-form-category mb-3">
                     <p>Categories</p>
@@ -46,41 +58,83 @@
                                th:value="${category.id}"
                                th:id="${'categories'+category.id}"
                                th:field="*{categories}"
+                               th:classappend="${#fields.hasErrors('categories')?'is-invalid':''}"
                         />
                         <label class="form-check-label"
                                th:for="${'categories'+category.id}"
                                th:text="${category.description}"></label>
                     </div>
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('categories')}">
+                        <li th:each="err : ${#fields.errors('categories')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <div class="row mb-3">
                     <div class="recipe-form-preparation col">
                         <label for="recipe-preparation" class="form-label">Preparation time</label>
-                        <input id="recipe-preparation" th:field="*{prepTime}" class="form-control" type="number"/>
+                        <input id="recipe-preparation" th:field="*{prepTime}"
+                               class="form-control" type="number"
+                               th:classappend="${#fields.hasErrors('prepTime')?'is-invalid':''}"
+                        />
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('prepTime')}">
+                            <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                        </ul>
                     </div>
                     <div class="recipe-form-cooking col">
                         <label for="recipe-cooking" class="form-label">Cooking time</label>
-                        <input id="recipe-cooking" th:field="*{cookTime}" class="form-control" type="number"/>
+                        <input id="recipe-cooking" th:field="*{cookTime}"
+                               class="form-control" type="number"
+                               th:classappend="${#fields.hasErrors('cookTime')?'is-invalid':''}"
+                        />
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('cookTime')}">
+                            <li     th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"></li>
+                        </ul>
                     </div>
                     <div class="recipe-form-servings col">
                         <label for="recipe-servings" class="form-label">Servings</label>
-                        <input id="recipe-servings" th:field="*{servings}" class="form-control" type="number"/>
+                        <input id="recipe-servings" th:field="*{servings}"
+                               class="form-control" type="number"
+                               th:classappend="${#fields.hasErrors('servings')?'is-invalid':''}"
+                        />
+                        <ul class="invalid-feedback" th:if="${#fields.hasErrors('servings')}">
+                            <li th:each="err : ${#fields.errors('servings')}" th:text="${err}"></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="recipe-form-image mb-3">
                     <label for="recipe-image" class="form-label">Image</label>
-                    <input id="recipe-image" name="recipe-image" class="form-control" type="file"/>
+                    <input id="recipe-image" name="recipe-image"
+                           class="form-control" type="file"
+                    />
                 </div>
                 <div class="recipe-form-source mb-3">
                     <label for="recipe-source" class="form-label">Source</label>
-                    <input id="recipe-source" th:field="*{source}" class="form-control" type="text"/>
+                    <input id="recipe-source" th:field="*{source}"
+                           class="form-control" type="text"
+                           th:classappend="${#fields.hasErrors('source')?'is-invalid':''}"
+                    />
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('source')}">
+                        <li th:each="err : ${#fields.errors('source')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <div class="recipe-form-url mb-3">
                     <label for="recipe-url" class="form-label">Url</label>
-                    <input id="recipe-url" th:field="*{url}" class="form-control" type="url" />
+                    <input id="recipe-url" th:field="*{url}"
+                           class="form-control" type="url"
+                           th:classappend="${#fields.hasErrors('url')?'is-invalid':''}"
+                    />
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('url')}">
+                        <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <div class="recipe-form-direction mb-3">
                     <label for="recipe-direction" class="form-label">Directions</label>
-                    <textarea id="recipe-direction" th:field="*{directions}" class="form-control text-editor" rows="3"></textarea>
+                    <textarea id="recipe-direction" th:field="*{directions}"
+                              class="form-control text-editor" rows="3"
+                              th:classappend="${#fields.hasErrors('directions')?'is-invalid':''}"
+                    ></textarea>
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('directions')}">
+                        <li th:each="err : ${#fields.errors('directions')}" th:text="${err}"></li>
+                    </ul>
                 </div>
 
                 <hr />
@@ -88,7 +142,12 @@
                     <label for="recipe-note-description" class="form-label">Notes</label>
                     <textarea id="recipe-note-description"
                               rows="3"
-                              th:field="*{notes.recipeNotes}" class="form-control text-editor"></textarea>
+                              th:field="*{notes.recipeNotes}" class="form-control text-editor"
+                              th:classappend="${#fields.hasErrors('notes.recipeNotes')?'is-invalid':''}"
+                    ></textarea>
+                    <ul class="invalid-feedback" th:if="${#fields.hasErrors('notes.recipeNotes')}">
+                        <li th:each="err : ${#fields.errors('notes.recipeNotes')}" th:text="${err}"></li>
+                    </ul>
                 </div>
                 <button class="btn btn-success" type="submit" th:text="${'Submit'}"></button>
             </form>

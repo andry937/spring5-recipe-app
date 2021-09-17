@@ -118,7 +118,11 @@ class RecipeControllerTest {
                         .file(firstFile)
                         .param("id", "")
                         .param("description", "some string")
+                        .param("directions", "directions")
+                        .param("source","source")
+                        .param("url","http://somurl.com")
                 )
+                .andExpect(model().hasNoErrors())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipes/"+id));
     }

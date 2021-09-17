@@ -1,5 +1,6 @@
 package guru.springframework.recipeapp.controllers;
 
+import guru.springframework.recipeapp.commands.CategoryCommand;
 import guru.springframework.recipeapp.commands.RecipeCommand;
 import guru.springframework.recipeapp.exceptions.NotFoundException;
 import guru.springframework.recipeapp.services.CategoryService;
@@ -9,11 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Set;
 
 @RequestMapping("/recipes")
 @Slf4j
@@ -25,6 +29,11 @@ public class RecipeController {
     public RecipeController(RecipeService recipeService, CategoryService categoryService) {
         this.recipeService = recipeService;
         this.categoryService = categoryService;
+    }
+
+    @ModelAttribute("categories")
+    public Set<CategoryCommand> populateCategories(){
+        return categoryService.getAllCategories();
     }
 
     @GetMapping({"/","","/index","/index.html"})
@@ -41,20 +50,28 @@ public class RecipeController {
 
     @RequestMapping("/create")
     public String createRecipe(Model model){
-        model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recipe", new RecipeCommand());
         return "recipe/form";
     }
 
     @RequestMapping("/{id}/update")
     public String updateRecipe(@PathVariable String id, Model model){
-        model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("recipe", recipeService.getRecipe(Long.valueOf(id)));
         return "recipe/form";
     }
 
     @PostMapping(value = {"/",""},consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public String saveOrUpdate(@ModelAttribute RecipeCommand command, @RequestPart("recipe-image") MultipartFile image) throws IOException {
+    public String saveOrUpdate(@Valid @ModelAttribute("recipe") RecipeCommand command,
+                                   BindingResult result,
+                                   @RequestPart("recipe-image") MultipartFile image,
+                                   Model model) throws IOException {
+        if(result.hasErrors()){
+            model.addAttribute("recipe", command);
+            result.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+            return "recipe/form";
+        }
         RecipeCommand savedRecipe = recipeService.saveRecipeCommand(command, image);
         return "redirect:/recipes/"+savedRecipe.getId();
     }
